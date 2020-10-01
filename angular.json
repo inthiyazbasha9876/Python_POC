@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "pythonpoc"
+    }
+  },
+  "defaultProject": "pythonpoc",
+  "cli": {
+    "analytics": "e2240673-e34f-4658-9556-2018eb7ae0fc"
+  }
 }
