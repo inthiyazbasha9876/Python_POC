@@ -7,17 +7,47 @@ import { ServiceService } from 'src/app/services/service.service';
   styleUrls: ['./dasboard.component.scss']
 })
 export class DasboardComponent implements OnInit {
+
+  user
+  studentdata
+  studentName
+  sid
   acData: any
   NonAcData: any
   seatseleted: any = []
-
   constructor(private service: ServiceService) {
-    this.getacdata();
-    this.getnonacdata()
+
   }
 
 
   ngOnInit(): void {
+    this.getacdata();
+    this.getnonacdata()
+
+    this.getrole()
+  }
+
+  getrole() {
+     this.sid = localStorage.getItem('id')
+    console.log(this.sid);
+    
+    this.user = localStorage.getItem('role')
+    if(this.user=='student'){
+      this.getstudentbyid(this.sid)
+
+    }
+   
+  }
+
+  getstudentbyid(e){
+    console.log(e);
+    let data
+    this.service.getstudentByid(e).subscribe(res=>{
+          console.log("student detials",res); 
+          data=res
+          this.studentdata=data
+          this.studentName=data.first_name +" "+ data.last_name
+    })
   }
 
   getacdata() {
@@ -57,14 +87,8 @@ export class DasboardComponent implements OnInit {
 
   bookseat() {
     console.log(this.seatseleted);
-    let gender = null
     for (let i of this.seatseleted) {
-      if (i.id % 2 == 0) {
-        gender = "male";
-      } else {
-        gender = "female";
-      }
-      this.service.updateacdata(i.id, gender).subscribe(res => {
+      this.service.updateacdata(i.id,this.studentdata.gender,this.sid).subscribe(res => {
         console.log(res);
         this.getacdata()
       })

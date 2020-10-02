@@ -1,21 +1,21 @@
 <div class="row">
     <div class="container maindiv">
         <div class="row">
-            <button class="btn cbtn">Student</button>
-            <button class="btn cbtn">Admin</button>
+            <button class="btn cbtn" (click)="personselect('Student')">Student</button>
+            <button class="btn cbtn" (click)="personselect('Admin')">Admin</button>
         </div>
         <div class="row logindiv">
             <div class="col-md-6 nopadding">
                 <img src="./assets/image1.jpg">
             </div>
             <div class="col-md-6 login">
-                <p class="heading">Login</p>
+                <p class="heading">{{person}} Login</p>
                 <form>
-                    <input type=text class="form-control" placeholder="enter user name">
-                    <input type="password" class="form-control" placeholder="enter password">
+                    <input type=text class="form-control" name="username" [(ngModel)]="username" placeholder="enter user name">
+                    <input type="password" class="form-control" name="pass" [(ngModel)]="password" placeholder="enter password">
                     
                 </form>
-                <button class="form-control btn lbtn" routerLink="/home">Login</button>
+                <button class="form-control btn lbtn" (click)="login()">Login</button>
                 <div class="row">
                     <p>forgot password</p>
                     <p class="ml-auto">New user Regiter</p>

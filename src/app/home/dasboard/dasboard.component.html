@@ -7,7 +7,7 @@
     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
       aria-selected="false">Non-AC-Classes</a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item" *ngIf="user == 'admin'">
     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
       aria-selected="false">Students</a>
   </li>
@@ -23,7 +23,7 @@
             <i *ngIf="ad.Booked" class='fas fa-couch icon' (click)="select(i)" [ngClass]="ad.gender == 'male' ? 'bookedmale':'bookedfemale'"></i>
           </div>
         </div>
-        <button class="btn btn-secondary" (click)="bookseat()">Book</button>
+        <button *ngIf="user=='student'" class="btn btn-secondary" (click)="bookseat()">Book</button>
 
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceService } from '../services/service.service';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +8,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  user
+  head: string = 'Dashboard'
+  studentName
+  constructor(private service: ServiceService) {
+    this.setValue()
+  }
 
-  navbar:string="Admin DashBoard"
   ngOnInit(): void {
   }
 
-  setvalue(e){
-    this.navbar=e
+
+  setValue() {
+    let id = localStorage.getItem('id')
+    this.user = localStorage.getItem('role')
+    this.getstuddeta(id)
+  }
+
+  headingset(e) {
+    this.head = e
+  }
+
+  getstuddeta(e) {
+    let data
+    this.service.getstudentByid(e).subscribe(res => {
+      console.log("student detials", res);
+      data = res
+      this.studentName = data.first_name + " " + data.last_name
+    })
   }
 }

@@ -10,25 +10,35 @@
                 <ul class="nav flex-column">
                     <div class="row icondiv">
                         <i class="fa fa-user icon my-auto" aria-hidden="true"></i>
-                        <p class="my-auto ml-3 text">Name</p>
+                        <p class="my-auto ml-3 text">{{studentName |titlecase}}</p>
                     </div>
 
-                    <li class="nav-item">
-                      <a class="nav-link active" routerLink="dashboard" routerLinkActive="active" (click)="setvalue('Admin DashBoard')">Admin Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" routerLink="dummy" routerLinkActive="active">Dummy</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Link</a>
-                    </li>
+                    <div *ngIf="user == 'admin'">
+                      <li class="nav-item">
+                        <a class="nav-link active" routerLink="dashboard" routerLinkActive="active" (click)="headingset('DashBoard')">Admin Dashboard</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" routerLink="dummy" routerLinkActive="active" (click)="headingset('Info')">My Info</a>
+                      </li>
+
+                    </div>
+
+                    <div *ngIf="user == 'student'">
+                      <li class="nav-item">
+                        <a class="nav-link active" routerLink="dashboard" routerLinkActive="active" (click)="headingset('DashBoard')">Dashboard</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" routerLink="dummy" routerLinkActive="active" (click)="headingset('Info')">My Info</a>
+                      </li>
+                    </div>
+                  
                   </ul>
             </div>
           </nav>
     </div>
     <div class="col-md-10 col-sm-12 data">
       <div class="row header shadow">
-          <p>{{navbar}}</p>
+         <p>{{head}}</p>
       </div>
         <router-outlet></router-outlet>
     </div>
